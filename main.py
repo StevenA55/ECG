@@ -134,7 +134,7 @@ class VentanaPrincipal(QMainWindow):
         
     def serial_disconnect(self):
         self.serial.close()
-        self.plt.clear()
+        #self.plt.clear()
         
     def read_data(self):
         if not self.serial.canReadLine(): return
