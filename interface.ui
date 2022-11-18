@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>722</width>
-    <height>688</height>
+    <width>807</width>
+    <height>677</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -259,7 +259,7 @@ QToolBox::tab{
                   <x>0</x>
                   <y>0</y>
                   <width>206</width>
-                  <height>208</height>
+                  <height>202</height>
                  </rect>
                 </property>
                 <property name="styleSheet">
@@ -384,7 +384,7 @@ border-bottom-left-radius: 20px;
                   <x>0</x>
                   <y>0</y>
                   <width>206</width>
-                  <height>208</height>
+                  <height>202</height>
                  </rect>
                 </property>
                 <property name="styleSheet">
@@ -998,7 +998,7 @@ QPushButton:hover{
                        <widget class="QFrame" name="frame_13">
                         <property name="minimumSize">
                          <size>
-                          <width>180</width>
+                          <width>190</width>
                           <height>0</height>
                          </size>
                         </property>
@@ -1018,6 +1018,19 @@ QPushButton:hover{
                          <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_18">
+                         <item>
+                          <widget class="QLabel" name="label_26">
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>5</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
                          <item>
                           <widget class="QLabel" name="label_5">
                            <property name="minimumSize">
@@ -1047,7 +1060,7 @@ QPushButton:hover{
                            <property name="minimumSize">
                             <size>
                              <width>0</width>
-                             <height>10</height>
+                             <height>5</height>
                             </size>
                            </property>
                            <property name="maximumSize">
@@ -1109,7 +1122,7 @@ QComboBox QAbstractItemView{
                            <property name="maximumSize">
                             <size>
                              <width>16777215</width>
-                             <height>10</height>
+                             <height>5</height>
                             </size>
                            </property>
                            <property name="text">
@@ -1152,7 +1165,7 @@ QComboBox QAbstractItemView{
                            <property name="maximumSize">
                             <size>
                              <width>16777215</width>
-                             <height>10</height>
+                             <height>5</height>
                             </size>
                            </property>
                            <property name="text">
@@ -1207,7 +1220,7 @@ QComboBox QAbstractItemView{
                            <property name="maximumSize">
                             <size>
                              <width>16777215</width>
-                             <height>10</height>
+                             <height>5</height>
                             </size>
                            </property>
                            <property name="text">
@@ -1374,7 +1387,7 @@ QPushButton:hover{
                           </property>
                           <layout class="QVBoxLayout" name="verticalLayout_17">
                            <item>
-                            <layout class="QVBoxLayout" name="graph_layout"/>
+                            <layout class="QVBoxLayout" name="graph_AD8232"/>
                            </item>
                           </layout>
                          </widget>
@@ -1392,19 +1405,291 @@ QPushButton:hover{
              </layout>
             </widget>
             <widget class="QWidget" name="page_dos">
-             <widget class="QLabel" name="label_6">
-              <property name="geometry">
-               <rect>
-                <x>330</x>
-                <y>330</y>
-                <width>81</width>
-                <height>16</height>
-               </rect>
+             <layout class="QVBoxLayout" name="verticalLayout_20">
+              <property name="spacing">
+               <number>0</number>
               </property>
-              <property name="text">
-               <string>Último registro</string>
+              <property name="leftMargin">
+               <number>0</number>
               </property>
-             </widget>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QFrame" name="frame_22">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_25">
+                 <property name="spacing">
+                  <number>5</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>5</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>5</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>5</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>5</number>
+                 </property>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_12">
+                   <item>
+                    <widget class="QFrame" name="frame_26">
+                     <property name="minimumSize">
+                      <size>
+                       <width>190</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>210</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_30">
+                      <item>
+                       <widget class="QLabel" name="label_6">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>5</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>5</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_22">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>30</height>
+                         </size>
+                        </property>
+                        <property name="font">
+                         <font>
+                          <pointsize>14</pointsize>
+                         </font>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">color: rgb(218,0,55) ;</string>
+                        </property>
+                        <property name="text">
+                         <string>ULTIMO REGISTRO</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_24">
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>5</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="cb_R">
+                        <property name="minimumSize">
+                         <size>
+                          <width>84</width>
+                          <height>30</height>
+                         </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">QComboBox{
+	border: 3px solid #ffffff;
+	border-radius: 5px;
+	min-width: 6em;
+	color: rgb(255, 255, 255);
+}
+
+QComboBox::drop-down{
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 15px;
+	border-left-width: 3px;
+	border-left-color: #ffffff;
+	border-left-style: solid;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+QComboBox QAbstractItemView{
+	background: #2c2c2c;
+	selection-background-color: #ff0037;
+	color: #ffffff;
+}
+</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_25">
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>5</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="bt_selectR">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>30</height>
+                         </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">QPushButton{
+	border-radius: 18px;
+	background-color:rgb(9,5,13);
+	Color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	background-color: rgb(255, 255, 255);
+	color: rgb(9,5,13);
+}
+</string>
+                        </property>
+                        <property name="text">
+                         <string>SELECCIONAR</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <spacer name="verticalSpacer_4">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>20</width>
+                          <height>355</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_23">
+                        <property name="minimumSize">
+                         <size>
+                          <width>100</width>
+                          <height>90</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>220</width>
+                          <height>100</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="pixmap">
+                         <pixmap>Logo.png</pixmap>
+                        </property>
+                        <property name="scaledContents">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_21" stretch="1,2,2">
+                     <item>
+                      <widget class="QFrame" name="frame_23">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_24">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_29">
+                        <item>
+                         <layout class="QVBoxLayout" name="graph_R"/>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_25">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_28">
+                        <item>
+                         <layout class="QVBoxLayout" name="graph_panR"/>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
             </widget>
             <widget class="QWidget" name="page_tres">
              <property name="styleSheet">
@@ -1458,7 +1743,7 @@ border-radius: 10px;</string>
                   <widget class="QFrame" name="frame_18">
                    <property name="minimumSize">
                     <size>
-                     <width>180</width>
+                     <width>190</width>
                      <height>0</height>
                     </size>
                    </property>
@@ -1483,13 +1768,13 @@ border-radius: 10px;</string>
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>10</height>
+                        <height>5</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>16777215</width>
-                        <height>10</height>
+                        <height>5</height>
                        </size>
                       </property>
                       <property name="text">
@@ -1507,17 +1792,23 @@ border-radius: 10px;</string>
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>10</pointsize>
+                        <pointsize>14</pointsize>
                        </font>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">color: rgb(218,0,55) ;</string>
                       </property>
                       <property name="text">
-                       <string>MIT-BIH Arrhythmia Database</string>
+                       <string>MIT-BIH: Arrhythmia Database</string>
+                      </property>
+                      <property name="scaledContents">
+                       <bool>false</bool>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="wordWrap">
+                       <bool>true</bool>
                       </property>
                      </widget>
                     </item>
@@ -1526,13 +1817,13 @@ border-radius: 10px;</string>
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>10</height>
+                        <height>5</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>16777215</width>
-                        <height>10</height>
+                        <height>5</height>
                        </size>
                       </property>
                       <property name="text">
@@ -1541,7 +1832,7 @@ border-radius: 10px;</string>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QComboBox" name="comboBox">
+                     <widget class="QComboBox" name="cb_BD">
                       <property name="minimumSize">
                        <size>
                         <width>84</width>
@@ -1581,13 +1872,13 @@ QComboBox QAbstractItemView{
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
-                        <height>10</height>
+                        <height>5</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>16777215</width>
-                        <height>10</height>
+                        <height>5</height>
                        </size>
                       </property>
                       <property name="text">
@@ -1596,7 +1887,7 @@ QComboBox QAbstractItemView{
                      </widget>
                     </item>
                     <item>
-                     <widget class="QPushButton" name="pushButton">
+                     <widget class="QPushButton" name="bt_selectBD">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -1690,7 +1981,7 @@ QPushButton:hover{
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_23">
                       <item>
-                       <layout class="QVBoxLayout" name="verticalLayout_21"/>
+                       <layout class="QVBoxLayout" name="graph_DB"/>
                       </item>
                      </layout>
                     </widget>
@@ -1708,7 +1999,7 @@ QPushButton:hover{
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_22">
                       <item>
-                       <layout class="QVBoxLayout" name="verticalLayout_20"/>
+                       <layout class="QVBoxLayout" name="graph_panDB"/>
                       </item>
                      </layout>
                     </widget>

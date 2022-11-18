@@ -49,12 +49,32 @@ class VentanaPrincipal(QMainWindow):
         self.serial.readyRead.connect(self.read_data)
         self.x = list(np.linspace(0,100,100))
         self.y = list(np.linspace(0,0,100))
-        # Grafica
+        # Graficas
         pg.setConfigOption('background', '#09050d')
         pg.setConfigOption('foreground', '#ffffff')
         self.plt = pg.PlotWidget(title = 'ECG')
-        self.graph_layout.addWidget(self.plt)
+        self.graph_AD8232.addWidget(self.plt)
         self.read_ports()
+        
+        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('foreground', '#ffffff')
+        self.plt = pg.PlotWidget(title = 'MIT-BIH Arrhythmia Database')
+        self.graph_DB.addWidget(self.plt)
+        
+        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('foreground', '#ffffff')
+        self.plt = pg.PlotWidget(title = 'Pan Tompkins QRS Detección')
+        self.graph_panDB.addWidget(self.plt)  
+        
+        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('foreground', '#ffffff')
+        self.plt = pg.PlotWidget(title = 'ECG Último Registro')
+        self.graph_R.addWidget(self.plt)
+        
+        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('foreground', '#ffffff')
+        self.plt = pg.PlotWidget(title = 'Pan Tompkins QRS Detección')
+        self.graph_panR.addWidget(self.plt)  
 
 
     def mousePressEvent(self, event):
