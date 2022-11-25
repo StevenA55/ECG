@@ -1302,7 +1302,7 @@ QPushButton:hover{
 </string>
                            </property>
                            <property name="text">
-                            <string>DETENER</string>
+                            <string>PAUSAR</string>
                            </property>
                           </widget>
                          </item>

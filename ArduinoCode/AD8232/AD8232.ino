@@ -13,6 +13,6 @@ void loop() {
   else {
     Serial.println(analogRead(A0));
   }
-  delay(5);
+  delay(1/360);
 
 }

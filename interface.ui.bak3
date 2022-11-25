@@ -1302,7 +1302,7 @@ QPushButton:hover{
 </string>
                            </property>
                            <property name="text">
-                            <string>DETENER</string>
+                            <string>PAUSAR</string>
                            </property>
                           </widget>
                          </item>
@@ -1501,7 +1501,7 @@ QPushButton:hover{
                          </font>
                         </property>
                         <property name="styleSheet">
-                         <string notr="true">color: #e00518 ;</string>
+                         <string notr="true">color: rgb(218,0,55) ;</string>
                         </property>
                         <property name="text">
                          <string>ULTIMO REGISTRO</string>
@@ -1796,7 +1796,7 @@ border-radius: 10px;</string>
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">color: #e00518 ;</string>
+                       <string notr="true">color: rgb(218,0,55) ;</string>
                       </property>
                       <property name="text">
                        <string>MIT-BIH: Arrhythmia Database</string>
@@ -1832,7 +1832,7 @@ border-radius: 10px;</string>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QComboBox" name="cb_DB">
+                     <widget class="QComboBox" name="cb_BD">
                       <property name="minimumSize">
                        <size>
                         <width>84</width>

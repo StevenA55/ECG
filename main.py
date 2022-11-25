@@ -10,6 +10,8 @@ from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 from PyQt5.QtCore import QIODevice, QPoint
 import pyqtgraph as pg
 import numpy as np
+from classes.DB import *
+from classes.R import *
 
 class VentanaPrincipal(QMainWindow):
     def __init__(self):
@@ -47,36 +49,74 @@ class VentanaPrincipal(QMainWindow):
         self.bt_connect.clicked.connect(self.serial_connect)
         self.bt_disconnect.clicked.connect(self.serial_disconnect)
         self.serial.readyRead.connect(self.read_data)
-        self.x = list(np.linspace(0,100,100))
-        self.y = list(np.linspace(0,0,100))
+        self.x = list(np.linspace(0,700,700))
+        self.y = list(np.linspace(0,0,700))
+        # Control Select
+        self.bt_selectDB.clicked.connect(self.graph_load)
+        self.bt_selectR.clicked.connect(self.graph_Re)
+        
         # Graficas
+        ## plt1 -> BD
         pg.setConfigOption('background', '#09050d')
         pg.setConfigOption('foreground', '#ffffff')
-        self.plt = pg.PlotWidget(title = 'ECG')
-        self.graph_AD8232.addWidget(self.plt)
+        self.plt1 = pg.PlotWidget(title = 'MIT-BIH Arrhythmia Database')
+        self.graph_DB.addWidget(self.plt1)
+        
+        ## plt2 -> PAN DB
+        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('foreground', '#ffffff')
+        self.plt2 = pg.PlotWidget(title = 'Pan Tompkins QRS Detección')
+        self.graph_panDB.addWidget(self.plt2)  
+        
+        ## plt3 -> Registro
+        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('foreground', '#ffffff')
+        self.plt3 = pg.PlotWidget(title = 'ECG Último Registro')
+        self.graph_R.addWidget(self.plt3)
+        
+        ## plt4 -> PAN registro
+        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('foreground', '#ffffff')
+        self.plt4 = pg.PlotWidget(title = 'Pan Tompkins QRS Detección')
+        self.graph_panR.addWidget(self.plt4)
+        
+        ## plt5 -> ECG real time
+        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('foreground', '#ffffff')
+        self.plt5 = pg.PlotWidget(title = 'ECG')
+        self.graph_AD8232.addWidget(self.plt5)
         self.read_ports()
         
-        pg.setConfigOption('background', '#09050d')
-        pg.setConfigOption('foreground', '#ffffff')
-        self.plt = pg.PlotWidget(title = 'MIT-BIH Arrhythmia Database')
-        self.graph_DB.addWidget(self.plt)
+        # ComboBox
+        cb = getcb_DB()
+        lista = []
+        for l in cb:
+            line = l.strip('\n')
+            lista.append(line)
+        R = ['Último registro']
+        self.cb_DB.clear()
+        self.cb_DB.addItems(lista)
+        self.cb_R.clear()
+        self.cb_R.addItems(R)
         
-        pg.setConfigOption('background', '#09050d')
-        pg.setConfigOption('foreground', '#ffffff')
-        self.plt = pg.PlotWidget(title = 'Pan Tompkins QRS Detección')
-        self.graph_panDB.addWidget(self.plt)  
+    def graph_load (self):
+        select_DB = self.cb_DB.currentText()
+        t, ecg = data(select_DB)
+        self.plt1.plot(t, ecg, pen=pg.mkPen('#e00518', width=2))
         
-        pg.setConfigOption('background', '#09050d')
-        pg.setConfigOption('foreground', '#ffffff')
-        self.plt = pg.PlotWidget(title = 'ECG Último Registro')
-        self.graph_R.addWidget(self.plt)
+    def graph_Re (self):
+        registro = get_R()
+        data = []
+        for r in registro:
+            re = float(r.strip('\n'))
+            data.append(re)
+        #print(data)
+        data = np.array(data)
+        fs = 360
+        ts = 1/fs
+        t = np.linspace(0, np.size(data),np.size(data))*ts
+        self.plt3.plot(t, data, pen=pg.mkPen('#e00518', width=2))
         
-        pg.setConfigOption('background', '#09050d')
-        pg.setConfigOption('foreground', '#ffffff')
-        self.plt = pg.PlotWidget(title = 'Pan Tompkins QRS Detección')
-        self.graph_panR.addWidget(self.plt)  
-
-
     def mousePressEvent(self, event):
         self.clickPosition = event.globalPos()
     def mover_menu(self):
@@ -145,7 +185,12 @@ class VentanaPrincipal(QMainWindow):
         
     def serial_connect(self):
         #self.serial.waitForReadyRead(100)
-        self.plt.clear()
+        #self.read_ports()
+        # Reset
+        file = open('database/config/read.csv', "w")
+        file.close()
+        
+        self.plt1.clear()
         self.port = self.cb_list_ports.currentText()
         self.baud = self.cb_list_baudrates.currentText()
         self.serial.setBaudRate(int(self.baud))
@@ -161,11 +206,16 @@ class VentanaPrincipal(QMainWindow):
         rx = self.serial.readLine()
         x = str(rx, 'utf-8').strip()
         x = float(x)
-        #print(x)
+        # Save
+        ecg = str(x)
+        f = open('database/config/read.csv','a')
+        f.write(ecg+'\n')
+        f.close()
+        
         self.y = self.y[1:]
         self.y.append(x)
-        self.plt.clear()
-        self.plt.plot(self.x, self.y, pen=pg.mkPen('#da0037', width=2))
+        self.plt5.clear()
+        self.plt5.plot(self.x, self.y, pen=pg.mkPen('#e00518', width=2))
         
     def send_data(self, data):
         data = data + "\n"
