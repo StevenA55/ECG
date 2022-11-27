@@ -55,7 +55,7 @@ def QRS(select_DB, ban, data):
         ECG_BP,ECG_raw, size = BandPassECG(Fs,select_DB,ban,data)
         time = int(size/Fs)
     elif ban == 0:
-        Fs = 140
+        Fs = 148
         ECG_BP,ECG_raw, size = BandPassECG(Fs,select_DB,ban,data)
         time = int(np.size(data)/Fs)
     #Path ='C:/Users/57310/Documents/DABM/Proyecto final/database/101m.mat'
@@ -97,7 +97,7 @@ def QRS(select_DB, ban, data):
     ts_ma = Series(np.squeeze(ECG_ma[:time*Fs]), index=np.arange(ECG_raw[:time*Fs].shape[0])/Fs)
     PAN = ts_ma.tolist()
     QRS = QRS.tolist()
-    #print(QRS)
+    print(QRS)
     #print(type(QRS))
     #fig = plt.figure(frameon="False"); ts_df.plot(style='y',label='ECG-DF') 
     #ts_ma.plot(style='r-', label='ECG-MA',linewidth=2.0)

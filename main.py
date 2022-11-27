@@ -133,7 +133,7 @@ class VentanaPrincipal(QMainWindow):
         #print(data)
         data = np.array(data)
         type(data)
-        fs = 140
+        fs = 148
         ts = 1/fs
         time = int(np.size(data)/fs)
         size = time*fs
