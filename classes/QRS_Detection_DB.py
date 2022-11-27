@@ -104,4 +104,4 @@ def QRS(select_DB, ban, data):
     #plt.ylabel('Amp'); plt.xlabel('Time[S]',); plt.legend()
     #plt.tight_layout(); plt.show()
     #fig.savefig('ECG_ma.png', transparent=True)
-    return PAN
+    return PAN, QRS

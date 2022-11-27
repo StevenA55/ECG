@@ -1377,93 +1377,25 @@ QPushButton:hover{
                                 </property>
                                 <property name="sizeHint" stdset="0">
                                  <size>
-                                  <width>10</width>
+                                  <width>312</width>
                                   <height>20</height>
                                  </size>
                                 </property>
                                </spacer>
                               </item>
                               <item>
-                               <widget class="QLabel" name="label_ritmo">
-                                <property name="minimumSize">
-                                 <size>
-                                  <width>220</width>
-                                  <height>100</height>
-                                 </size>
-                                </property>
-                                <property name="maximumSize">
-                                 <size>
-                                  <width>220</width>
-                                  <height>100</height>
-                                 </size>
-                                </property>
-                                <property name="font">
-                                 <font>
-                                  <pointsize>20</pointsize>
-                                 </font>
-                                </property>
-                                <property name="styleSheet">
-                                 <string notr="true">QLabel{
-border: 3px solid #e00518;
-
-border -radius
-}</string>
-                                </property>
+                               <widget class="QLabel" name="label_27">
                                 <property name="text">
-                                 <string/>
-                                </property>
-                                <property name="alignment">
-                                 <set>Qt::AlignCenter</set>
-                                </property>
-                                <property name="wordWrap">
-                                 <bool>true</bool>
+                                 <string>Esto es una prueba</string>
                                 </property>
                                </widget>
                               </item>
                               <item>
-                               <widget class="QLabel" name="label_BPM">
-                                <property name="minimumSize">
-                                 <size>
-                                  <width>220</width>
-                                  <height>100</height>
-                                 </size>
-                                </property>
-                                <property name="maximumSize">
-                                 <size>
-                                  <width>220</width>
-                                  <height>100</height>
-                                 </size>
-                                </property>
-                                <property name="styleSheet">
-                                 <string notr="true">QLabel{
-border: 3px solid #e00518;
-
-border -radius
-}</string>
-                                </property>
+                               <widget class="QLabel" name="label_28">
                                 <property name="text">
-                                 <string/>
-                                </property>
-                                <property name="alignment">
-                                 <set>Qt::AlignCenter</set>
-                                </property>
-                                <property name="wordWrap">
-                                 <bool>true</bool>
+                                 <string>Esto también es una prueba</string>
                                 </property>
                                </widget>
-                              </item>
-                              <item>
-                               <spacer name="horizontalSpacer_5">
-                                <property name="orientation">
-                                 <enum>Qt::Horizontal</enum>
-                                </property>
-                                <property name="sizeHint" stdset="0">
-                                 <size>
-                                  <width>65</width>
-                                  <height>20</height>
-                                 </size>
-                                </property>
-                               </spacer>
                               </item>
                              </layout>
                             </widget>
@@ -1747,108 +1679,6 @@ QPushButton:hover{
                        <property name="frameShadow">
                         <enum>QFrame::Raised</enum>
                        </property>
-                       <layout class="QHBoxLayout" name="horizontalLayout_14">
-                        <item>
-                         <spacer name="horizontalSpacer_6">
-                          <property name="orientation">
-                           <enum>Qt::Horizontal</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0">
-                           <size>
-                            <width>30</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_ritmo_2">
-                          <property name="minimumSize">
-                           <size>
-                            <width>220</width>
-                            <height>100</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>220</width>
-                            <height>100</height>
-                           </size>
-                          </property>
-                          <property name="font">
-                           <font>
-                            <pointsize>20</pointsize>
-                           </font>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">QLabel{
-border: 3px solid #e00518;
-
-border -radius
-}</string>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                          <property name="wordWrap">
-                           <bool>true</bool>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_BPM_2">
-                          <property name="minimumSize">
-                           <size>
-                            <width>220</width>
-                            <height>100</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>220</width>
-                            <height>100</height>
-                           </size>
-                          </property>
-                          <property name="font">
-                           <font>
-                            <pointsize>20</pointsize>
-                           </font>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">QLabel{
-border: 3px solid #e00518;
-
-border -radius
-}</string>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                          <property name="wordWrap">
-                           <bool>true</bool>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <spacer name="horizontalSpacer_7">
-                          <property name="orientation">
-                           <enum>Qt::Horizontal</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0">
-                           <size>
-                            <width>65</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                       </layout>
                       </widget>
                      </item>
                      <item>
@@ -2165,108 +1995,6 @@ QPushButton:hover{
                      <property name="frameShadow">
                       <enum>QFrame::Raised</enum>
                      </property>
-                     <layout class="QHBoxLayout" name="horizontalLayout_15">
-                      <item>
-                       <spacer name="horizontalSpacer_8">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>33</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <widget class="QLabel" name="label_ritmo_3">
-                        <property name="minimumSize">
-                         <size>
-                          <width>220</width>
-                          <height>100</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>220</width>
-                          <height>100</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <pointsize>20</pointsize>
-                         </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QLabel{
-border: 3px solid #e00518;
-
-border -radius
-}</string>
-                        </property>
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                        <property name="wordWrap">
-                         <bool>true</bool>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QLabel" name="label_BPM_3">
-                        <property name="minimumSize">
-                         <size>
-                          <width>220</width>
-                          <height>100</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>220</width>
-                          <height>100</height>
-                         </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <pointsize>20</pointsize>
-                         </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">QLabel{
-border: 3px solid #e00518;
-
-border -radius
-}</string>
-                        </property>
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                        <property name="wordWrap">
-                         <bool>true</bool>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <spacer name="horizontalSpacer_9">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>65</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                     </layout>
                     </widget>
                    </item>
                    <item>

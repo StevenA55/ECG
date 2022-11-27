@@ -52,6 +52,7 @@ class VentanaPrincipal(QMainWindow):
         self.serial.readyRead.connect(self.read_data)
         self.x = list(np.linspace(0,700,700))
         self.y = list(np.linspace(0,0,700))
+        self.c = []
         # Control Select
         self.bt_selectDB.clicked.connect(self.graph_load)
         self.bt_selectR.clicked.connect(self.graph_Re)
@@ -110,13 +111,25 @@ class VentanaPrincipal(QMainWindow):
         self.cb_DB.addItems(lista)
         self.cb_R.clear()
         self.cb_R.addItems(R)
-        
     def graph_load (self):
         ban = 1
+        fs = 360
         val = []
         select_DB = self.cb_DB.currentText()
         t, ecg = data(select_DB)
-        PAN = QRS(select_DB, ban, val)
+        time = int(np.size(ecg)/fs)
+        PAN, peaks = QRS(select_DB, ban, val)
+        BPM = (len(peaks)*60)/time
+        displayText = 'No entra'
+        if BPM >= 55 and BPM <= 100:
+            displayText = 'Normal'
+        if BPM < 55:
+            displayText = 'Bradicardia'
+        if BPM > 100:
+            displayText = 'Taquicardia'
+        BPM = 'BPM: '+str("{:.1f}".format(BPM))
+        self.label_BPM_3.setText(BPM)
+        self.label_ritmo_3.setText(displayText)
         self.plt1.clear()
         self.plt2.clear()
         self.plt1.plot(t, ecg, pen=pg.mkPen('#e00518', width=2))
@@ -140,7 +153,18 @@ class VentanaPrincipal(QMainWindow):
         dif = np.size(data)-size
         data = data[:-dif]
         t = np.linspace(0, np.size(data),np.size(data))*ts
-        PAN = QRS(select_DB,ban,data)
+        PAN, peaks = QRS(select_DB,ban,data)
+        BPM = (len(peaks)*60)/time
+        displayText = 'No entra'
+        if BPM >= 55 and BPM <= 100:
+            displayText = 'Normal'
+        if BPM < 55:
+            displayText = 'Bradicardia'
+        if BPM > 100:
+            displayText = 'Taquicardia'
+        BPM = 'BPM: '+str("{:.1f}".format(BPM))
+        self.label_BPM_2.setText(BPM)
+        self.label_ritmo_2.setText(displayText)
         #print(len(t))
         self.plt3.clear()
         self.plt4.clear()
@@ -220,7 +244,6 @@ class VentanaPrincipal(QMainWindow):
         # Reset
         file = open('database/config/read.csv', "w")
         file.close()
-        
         self.plt1.clear()
         self.port = self.cb_list_ports.currentText()
         self.baud = self.cb_list_baudrates.currentText()
@@ -228,10 +251,11 @@ class VentanaPrincipal(QMainWindow):
         self.serial.setPortName(self.port)
         self.serial.open(QIODevice.ReadWrite)
         
+        
     def serial_disconnect(self):
         self.serial.close()
         #self.plt.clear()
-        
+    
     def read_data(self):
         if not self.serial.canReadLine(): return
         rx = self.serial.readLine()
@@ -242,11 +266,16 @@ class VentanaPrincipal(QMainWindow):
         f = open('database/config/read.csv','a')
         f.write(ecg+'\n')
         f.close()
+        
         self.y = self.y[1:]
         self.y.append(x)
+        self.c.append(x)
+        print(len(self.c))
+        if len(self.c) == 1480:
+            self.c = []
         self.plt5.clear()
         self.plt5.plot(self.x, self.y, pen=pg.mkPen('#e00518', width=2))
-        
+
     def send_data(self, data):
         data = data + "\n"
         #print(data)
