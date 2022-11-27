@@ -6,13 +6,10 @@ void setup() {
 }
 
 void loop() {
-
   if ((digitalRead(10) == 1) || (digitalRead(11) == 1)) {
     Serial.println('!');
   }
   else {
     Serial.println(analogRead(A0));
+    }
   }
-  delay(1/360);
-
-}

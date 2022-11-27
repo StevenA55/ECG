@@ -5,14 +5,18 @@ import numpy as np
 from pandas import Series
 from mat4py import loadmat
 import pandas as pd
-
-def BandPassECG(Fs,select_DB):
+def BandPassECG(Fs,select_DB, ban, data):
     # Import the signal
-    file = 'database/'+select_DB
-    x = loadmat(file)
-    ecg = x['val']
-    ecg = ecg[0]
-    ECG= np.transpose(ecg)
+    if ban == 1:
+        file = 'database/'+select_DB
+        x = loadmat(file)
+        ecg = x['val']
+        ecg = ecg[0]
+        ECG= np.transpose(ecg)
+        size = np.size(ECG)
+    elif ban == 0:
+        ECG = data
+        size = np.size(data)
     # Implementing the Butterworth BP filter
     W1     = 5*2/Fs                                    # --> 5 Hz cutt-off (high-pass) and Normalize by Sample Rate
     W2     = 15*2/Fs                                   # --> 15 Hz cutt-off (low-pass) and Normalize by Sample Rate
@@ -20,7 +24,7 @@ def BandPassECG(Fs,select_DB):
     ECG    = np.asarray(ECG)                           # --> let's convert the ECG to a numpy array, this makes it possible to perform vector operations 
     ECG    = np.squeeze(ECG)                           # --> squeeze
     ECG_BP = signal.filtfilt(b,a,ECG)    # --> filtering: note we use a filtfilt that compensates for the delay
-    return ECG_BP,ECG
+    return ECG_BP,ECG, size
 
 def Differentiate(ECG):
     '''
@@ -44,17 +48,24 @@ def QRSpeaks(ECG,Fs):
     '''
     peaks, _  = signal.find_peaks(ECG, height=np.mean(ECG), distance=round(Fs*0.200))
     return peaks
-def QRS(select_DB):
+def QRS(select_DB, ban, data):
     # Load and BP the Signal
-    Fs =360
+    if ban == 1:
+        Fs =360
+        ECG_BP,ECG_raw, size = BandPassECG(Fs,select_DB,ban,data)
+        time = int(size/Fs)
+    elif ban == 0:
+        Fs = 140
+        ECG_BP,ECG_raw, size = BandPassECG(Fs,select_DB,ban,data)
+        time = int(np.size(data)/Fs)
     #Path ='C:/Users/57310/Documents/DABM/Proyecto final/database/101m.mat'
     
-    ECG_BP,ECG_raw = BandPassECG(Fs,select_DB)
+    #ECG_BP,ECG_raw = BandPassECG(Fs,select_DB,ban,data)
     # Create Series and plot the first 10 seconds
-    ts_raw = Series(np.squeeze(ECG_raw[:10*Fs] - np.mean(ECG_raw)), index=np.arange(ECG_raw[:10*Fs].shape[0])/Fs)
-    ts_BP = Series(np.squeeze(ECG_BP[:10*Fs]), index=np.arange(ECG_raw[:10*Fs].shape[0])/Fs)
+    #ts_raw = Series(np.squeeze(ECG_raw[:10*Fs] - np.mean(ECG_raw)), index=np.arange(ECG_raw[:10*Fs].shape[0])/Fs)
+    #ts_BP = Series(np.squeeze(ECG_BP[:10*Fs]), index=np.arange(ECG_raw[:10*Fs].shape[0])/Fs)
     # BP Filter
-    ECG_BP,ECG_raw = BandPassECG(Fs,select_DB)
+    
     
     # Difference Filter
     ECG_df = Differentiate(ECG_BP)
@@ -83,9 +94,11 @@ def QRS(select_DB):
     #fig.savefig('ECG_df.png', transparent=True)
     
     #ECG_ma = MovingAverage(ECG_df)
-    ts_ma = Series(np.squeeze(ECG_ma[:10*Fs]), index=np.arange(ECG_raw[:10*Fs].shape[0])/Fs)
+    ts_ma = Series(np.squeeze(ECG_ma[:time*Fs]), index=np.arange(ECG_raw[:time*Fs].shape[0])/Fs)
     PAN = ts_ma.tolist()
-    print(QRS)
+    QRS = QRS.tolist()
+    #print(QRS)
+    #print(type(QRS))
     #fig = plt.figure(frameon="False"); ts_df.plot(style='y',label='ECG-DF') 
     #ts_ma.plot(style='r-', label='ECG-MA',linewidth=2.0)
     #plt.ylabel('Amp'); plt.xlabel('Time[S]',); plt.legend()

@@ -62,30 +62,41 @@ class VentanaPrincipal(QMainWindow):
         pg.setConfigOption('foreground', '#ffffff')
         self.plt1 = pg.PlotWidget(title = 'MIT-BIH Arrhythmia Database')
         self.graph_DB.addWidget(self.plt1)
+        styles = {'color':'#e00518', 'font-size':'17px'}
+        self.plt1.setLabel('left', 'Amplitud (mV)', **styles)
+        self.plt1.setLabel('bottom', 'Tiempo (s)', **styles)
         
         ## plt2 -> PAN DB
         pg.setConfigOption('background', '#09050d')
         pg.setConfigOption('foreground', '#ffffff')
         self.plt2 = pg.PlotWidget(title = 'Pan Tompkins: Detección QRS')
-        self.graph_panDB.addWidget(self.plt2)  
+        self.graph_panDB.addWidget(self.plt2)
+        self.plt2.setLabel('left', 'Amplitud (mV)', **styles)
+        self.plt2.setLabel('bottom', 'Tiempo (s)', **styles)
         
         ## plt3 -> Registro
         pg.setConfigOption('background', '#09050d')
         pg.setConfigOption('foreground', '#ffffff')
         self.plt3 = pg.PlotWidget(title = 'ECG Último Registro')
         self.graph_R.addWidget(self.plt3)
+        self.plt3.setLabel('left', 'Amplitud (mV)', **styles)
+        self.plt3.setLabel('bottom', 'Tiempo (s)', **styles)
         
         ## plt4 -> PAN registro
         pg.setConfigOption('background', '#09050d')
         pg.setConfigOption('foreground', '#ffffff')
         self.plt4 = pg.PlotWidget(title = 'Pan Tompkins: Detección QRS')
         self.graph_panR.addWidget(self.plt4)
+        self.plt4.setLabel('left', 'Amplitud (mV)', **styles)
+        self.plt4.setLabel('bottom', 'Tiempo (s)', **styles)
         
         ## plt5 -> ECG real time
         pg.setConfigOption('background', '#09050d')
         pg.setConfigOption('foreground', '#ffffff')
         self.plt5 = pg.PlotWidget(title = 'ECG')
         self.graph_AD8232.addWidget(self.plt5)
+        self.plt5.setLabel('left', 'Amplitud', **styles)
+        self.plt5.setLabel('bottom', 'Numero de muestra', **styles)
         self.read_ports()
         
         # ComboBox
@@ -101,13 +112,19 @@ class VentanaPrincipal(QMainWindow):
         self.cb_R.addItems(R)
         
     def graph_load (self):
+        ban = 1
+        val = []
         select_DB = self.cb_DB.currentText()
         t, ecg = data(select_DB)
-        PAN = QRS(select_DB)
+        PAN = QRS(select_DB, ban, val)
+        self.plt1.clear()
+        self.plt2.clear()
         self.plt1.plot(t, ecg, pen=pg.mkPen('#e00518', width=2))
         self.plt2.plot(t, PAN, pen=pg.mkPen('#e00518', width=2))
         
     def graph_Re (self):
+        ban = 0
+        select_DB = 0
         registro = get_R()
         data = []
         for r in registro:
@@ -115,12 +132,21 @@ class VentanaPrincipal(QMainWindow):
             data.append(re)
         #print(data)
         data = np.array(data)
+        type(data)
         fs = 140
         ts = 1/fs
+        time = int(np.size(data)/fs)
+        size = time*fs
+        dif = np.size(data)-size
+        data = data[:-dif]
         t = np.linspace(0, np.size(data),np.size(data))*ts
+        PAN = QRS(select_DB,ban,data)
+        #print(len(t))
         self.plt3.clear()
+        self.plt4.clear()
         self.plt3.plot(t, data, pen=pg.mkPen('#e00518', width=2))
-        
+        self.plt4.plot(t, PAN, pen=pg.mkPen('#e00518', width=2))
+    
     def mousePressEvent(self, event):
         self.clickPosition = event.globalPos()
         
