@@ -266,12 +266,26 @@ class VentanaPrincipal(QMainWindow):
         f = open('database/config/read.csv','a')
         f.write(ecg+'\n')
         f.close()
-        
         self.y = self.y[1:]
         self.y.append(x)
         self.c.append(x)
-        print(len(self.c))
-        if len(self.c) == 1480:
+        #print(len(self.c))
+        if len(self.c) == 740:
+            select_DB = 0
+            ban = 0
+            data = self.c
+            PAN, peaks = QRS(select_DB,ban,data)
+            BPM = (len(peaks)*60)/5
+            displayText = 'No entra'
+            if BPM >= 55 and BPM <= 100:
+                displayText = 'Normal'
+            if BPM < 55:
+                displayText = 'Bradicardia'
+            if BPM > 100:
+                displayText = 'Taquicardia'
+            BPM = 'BPM: '+str("{:.1f}".format(BPM))
+            self.label_BPM.setText(BPM)
+            self.label_ritmo.setText(displayText)
             self.c = []
         self.plt5.clear()
         self.plt5.plot(self.x, self.y, pen=pg.mkPen('#e00518', width=2))
