@@ -12,6 +12,7 @@ import pyqtgraph as pg
 import numpy as np
 from classes.DB import *
 from classes.R import *
+from classes.QRS_Detection_DB import *
 
 class VentanaPrincipal(QMainWindow):
     def __init__(self):
@@ -65,7 +66,7 @@ class VentanaPrincipal(QMainWindow):
         ## plt2 -> PAN DB
         pg.setConfigOption('background', '#09050d')
         pg.setConfigOption('foreground', '#ffffff')
-        self.plt2 = pg.PlotWidget(title = 'Pan Tompkins QRS Detección')
+        self.plt2 = pg.PlotWidget(title = 'Pan Tompkins: Detección QRS')
         self.graph_panDB.addWidget(self.plt2)  
         
         ## plt3 -> Registro
@@ -77,7 +78,7 @@ class VentanaPrincipal(QMainWindow):
         ## plt4 -> PAN registro
         pg.setConfigOption('background', '#09050d')
         pg.setConfigOption('foreground', '#ffffff')
-        self.plt4 = pg.PlotWidget(title = 'Pan Tompkins QRS Detección')
+        self.plt4 = pg.PlotWidget(title = 'Pan Tompkins: Detección QRS')
         self.graph_panR.addWidget(self.plt4)
         
         ## plt5 -> ECG real time
@@ -102,7 +103,9 @@ class VentanaPrincipal(QMainWindow):
     def graph_load (self):
         select_DB = self.cb_DB.currentText()
         t, ecg = data(select_DB)
+        PAN = QRS(select_DB)
         self.plt1.plot(t, ecg, pen=pg.mkPen('#e00518', width=2))
+        self.plt2.plot(t, PAN, pen=pg.mkPen('#e00518', width=2))
         
     def graph_Re (self):
         registro = get_R()
@@ -112,13 +115,15 @@ class VentanaPrincipal(QMainWindow):
             data.append(re)
         #print(data)
         data = np.array(data)
-        fs = 360
+        fs = 140
         ts = 1/fs
         t = np.linspace(0, np.size(data),np.size(data))*ts
+        self.plt3.clear()
         self.plt3.plot(t, data, pen=pg.mkPen('#e00518', width=2))
         
     def mousePressEvent(self, event):
         self.clickPosition = event.globalPos()
+        
     def mover_menu(self):
         if True:
             width =self.slide_menu_container.width()
@@ -211,7 +216,6 @@ class VentanaPrincipal(QMainWindow):
         f = open('database/config/read.csv','a')
         f.write(ecg+'\n')
         f.close()
-        
         self.y = self.y[1:]
         self.y.append(x)
         self.plt5.clear()
