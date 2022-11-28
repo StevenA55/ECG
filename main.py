@@ -3,7 +3,7 @@ import sys
 import icons_rc
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import QPropertyAnimation, QEasingCurve
-from PyQt5.QtGui import QColor, QIcon
+from PyQt5.QtGui import QColor, QIcon, QMovie
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.uic import loadUi
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
@@ -25,6 +25,10 @@ class VentanaPrincipal(QMainWindow):
         self.gripSize = 10
         self.grip = QtWidgets.QSizeGrip(self)
         self.grip.resize(self.gripSize, self.gripSize)
+        # 
+        #self.movie = QMovie("heart.gif")
+        #self.label_gif.setMovie(self.movie)
+        #self.movie.start()
         # Mover ventana
         self.header_frame.mouseMoveEvent= self.mover_ventana
         # Acceder a las páginas
@@ -59,7 +63,7 @@ class VentanaPrincipal(QMainWindow):
         
         # Graficas
         ## plt1 -> BD
-        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('background', '#000000')
         pg.setConfigOption('foreground', '#ffffff')
         self.plt1 = pg.PlotWidget(title = 'MIT-BIH Arrhythmia Database')
         self.graph_DB.addWidget(self.plt1)
@@ -68,7 +72,7 @@ class VentanaPrincipal(QMainWindow):
         self.plt1.setLabel('bottom', 'Tiempo (s)', **styles)
         
         ## plt2 -> PAN DB
-        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('background', '#000000')
         pg.setConfigOption('foreground', '#ffffff')
         self.plt2 = pg.PlotWidget(title = 'Pan Tompkins: Detección QRS')
         self.graph_panDB.addWidget(self.plt2)
@@ -76,7 +80,7 @@ class VentanaPrincipal(QMainWindow):
         self.plt2.setLabel('bottom', 'Tiempo (s)', **styles)
         
         ## plt3 -> Registro
-        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('background', '#000000')
         pg.setConfigOption('foreground', '#ffffff')
         self.plt3 = pg.PlotWidget(title = 'ECG Último Registro')
         self.graph_R.addWidget(self.plt3)
@@ -84,7 +88,7 @@ class VentanaPrincipal(QMainWindow):
         self.plt3.setLabel('bottom', 'Tiempo (s)', **styles)
         
         ## plt4 -> PAN registro
-        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('background', '#000000')
         pg.setConfigOption('foreground', '#ffffff')
         self.plt4 = pg.PlotWidget(title = 'Pan Tompkins: Detección QRS')
         self.graph_panR.addWidget(self.plt4)
@@ -92,7 +96,7 @@ class VentanaPrincipal(QMainWindow):
         self.plt4.setLabel('bottom', 'Tiempo (s)', **styles)
         
         ## plt5 -> ECG real time
-        pg.setConfigOption('background', '#09050d')
+        pg.setConfigOption('background', '#000000')
         pg.setConfigOption('foreground', '#ffffff')
         self.plt5 = pg.PlotWidget(title = 'ECG')
         self.graph_AD8232.addWidget(self.plt5)
@@ -117,10 +121,11 @@ class VentanaPrincipal(QMainWindow):
         val = []
         select_DB = self.cb_DB.currentText()
         t, ecg = data(select_DB)
+        t0 = t.tolist()
         time = int(np.size(ecg)/fs)
         PAN, peaks = QRS(select_DB, ban, val)
         BPM = (len(peaks)*60)/time
-        displayText = 'No entra'
+        #displayText = 'No entra'
         if BPM >= 55 and BPM <= 100:
             displayText = 'Normal'
         if BPM < 55:
@@ -128,11 +133,17 @@ class VentanaPrincipal(QMainWindow):
         if BPM > 100:
             displayText = 'Taquicardia'
         BPM = 'BPM: '+str("{:.1f}".format(BPM))
+        ti = []
+        peakvalue = []
+        for i in range (len(peaks)):
+            ti.append(t0[peaks[i]])
+            peakvalue.append(PAN[peaks[i]])
         self.label_BPM_3.setText(BPM)
         self.label_ritmo_3.setText(displayText)
         self.plt1.clear()
         self.plt2.clear()
         self.plt1.plot(t, ecg, pen=pg.mkPen('#e00518', width=2))
+        self.plt1.plot(ti, peakvalue, symbol='+')
         self.plt2.plot(t, PAN, pen=pg.mkPen('#e00518', width=2))
         
     def graph_Re (self):
@@ -270,12 +281,12 @@ class VentanaPrincipal(QMainWindow):
         self.y.append(x)
         self.c.append(x)
         #print(len(self.c))
-        if len(self.c) == 740:
+        if len(self.c) == 740: # muestras en 5s
             select_DB = 0
             ban = 0
             data = self.c
             PAN, peaks = QRS(select_DB,ban,data)
-            BPM = (len(peaks)*60)/5
+            BPM = (len(peaks)*60)/5 # 5 tiempo de muestra
             displayText = 'No entra'
             if BPM >= 55 and BPM <= 100:
                 displayText = 'Normal'
