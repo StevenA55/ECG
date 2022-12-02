@@ -13,11 +13,14 @@ import numpy as np
 from classes.DB import *
 from classes.R import *
 from classes.QRS_Detection_DB import *
+from PyQt5 import QtGui
 
 class VentanaPrincipal(QMainWindow):
     def __init__(self):
         super(VentanaPrincipal, self).__init__()
-        loadUi('interface.ui', self) # Para no convertirlo
+        loadUi('interface.ui', self) # Para no convertirlo}
+        # App Icon
+        self.setWindowIcon(QtGui.QIcon('icon.png'))
         # Elimina la barra de título
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.setWindowOpacity(1)
@@ -116,10 +119,15 @@ class VentanaPrincipal(QMainWindow):
         self.cb_R.clear()
         self.cb_R.addItems(R)
     def graph_load (self):
+        select_DB = self.cb_DB.currentText()
+        #Reset
+        file = open('database/config/statistics'+select_DB+'.csv', "w")
+        file.close()
+        #Start
         ban = 1
         fs = 360
         val = []
-        select_DB = self.cb_DB.currentText()
+        
         t, ecg = data(select_DB)
         t0 = t.tolist()
         time = int(np.size(ecg)/fs)
@@ -138,6 +146,28 @@ class VentanaPrincipal(QMainWindow):
         for i in range (len(peaks)):
             ti.append(t0[peaks[i]])
             peakvalue.append(PAN[peaks[i]])
+            if i == len(peaks)-1:
+                t1 = float(t[peaks[i-1]])
+                t2 = float(t[peaks[i]])
+                dif = t2-t1
+            else:
+                t1 = float(t[peaks[i]])
+                t2 = float(t[peaks[i+1]])
+                dif = t2-t1
+            if dif >= 0.6 and dif <= 1:
+                result = 'N'
+            else:
+                result = 'A'
+            t1 = str("{:.3f}".format(t1))
+            t2 = str("{:.3f}".format(t2))
+            dif =str("{:.3f}".format(dif))
+            f = open('database/config/statistics'+select_DB+'.csv','a')
+            linea = ';'.join([str(t1),str(dif),str(result),str(t2)])
+            f.write(linea+'\n')
+            f.close()
+
+        
+        
         self.label_BPM_3.setText(BPM)
         self.label_ritmo_3.setText(displayText)
         self.plt1.clear()
@@ -308,6 +338,9 @@ class VentanaPrincipal(QMainWindow):
             self.serial.write(data.encode())
 
 if __name__ == "__main__":
+     import ctypes
+     myappid = u'EGC' # arbitrary string
+     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
      app = QApplication(sys.argv)
      mi_app = VentanaPrincipal()
      mi_app.show()
