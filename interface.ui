@@ -1349,7 +1349,35 @@ QPushButton:hover{
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QLabel" name="label_12">
+                          <widget class="QLabel" name="label_gif">
+                           <property name="minimumSize">
+                            <size>
+                             <width>100</width>
+                             <height>150</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>220</width>
+                             <height>150</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="scaledContents">
+                            <bool>true</bool>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                           <property name="wordWrap">
+                            <bool>true</bool>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_page_uno">
                            <property name="minimumSize">
                             <size>
                              <width>100</width>

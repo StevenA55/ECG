@@ -28,10 +28,11 @@ class VentanaPrincipal(QMainWindow):
         self.gripSize = 10
         self.grip = QtWidgets.QSizeGrip(self)
         self.grip.resize(self.gripSize, self.gripSize)
-        # 
-        #self.movie = QMovie("heart.gif")
-        #self.label_gif.setMovie(self.movie)
-        #self.movie.start()
+        # Gif
+        self.label_page_uno.hide()
+        self.movie = QMovie("heart.gif")
+        self.label_gif.setMovie(self.movie)
+        self.movie.start()
         # Mover ventana
         self.header_frame.mouseMoveEvent= self.mover_ventana
         # Acceder a las páginas
@@ -60,6 +61,7 @@ class VentanaPrincipal(QMainWindow):
         self.x = list(np.linspace(0,700,700))
         self.y = list(np.linspace(0,0,700))
         self.c = []
+        self.d = []
         # Control Select
         self.bt_selectDB.clicked.connect(self.graph_load)
         self.bt_selectR.clicked.connect(self.graph_Re)
@@ -135,12 +137,12 @@ class VentanaPrincipal(QMainWindow):
         BPM = (len(peaks)*60)/time
         #displayText = 'No entra'
         if BPM >= 55 and BPM <= 100:
-            displayText = 'Normal'
+            displayText = 'N'
         if BPM < 55:
-            displayText = 'Bradicardia'
+            displayText = 'A'
         if BPM > 100:
-            displayText = 'Taquicardia'
-        BPM = 'BPM: '+str("{:.1f}".format(BPM))
+            displayText = 'A'
+        BPM = 'BPM_M: '+str("{:.1f}".format(BPM))
         ti = []
         peakvalue = []
         for i in range (len(peaks)):
@@ -165,9 +167,7 @@ class VentanaPrincipal(QMainWindow):
             linea = ';'.join([str(t1),str(dif),str(result),str(t2)])
             f.write(linea+'\n')
             f.close()
-
-        
-        
+            
         self.label_BPM_3.setText(BPM)
         self.label_ritmo_3.setText(displayText)
         self.plt1.clear()
@@ -198,12 +198,12 @@ class VentanaPrincipal(QMainWindow):
         BPM = (len(peaks)*60)/time
         displayText = 'No entra'
         if BPM >= 55 and BPM <= 100:
-            displayText = 'Normal'
+            displayText = 'N'
         if BPM < 55:
-            displayText = 'Bradicardia'
+            displayText = 'A'
         if BPM > 100:
-            displayText = 'Taquicardia'
-        BPM = 'BPM: '+str("{:.1f}".format(BPM))
+            displayText = 'A'
+        BPM = 'BPM_M: '+str("{:.1f}".format(BPM))
         self.label_BPM_2.setText(BPM)
         self.label_ritmo_2.setText(displayText)
         #print(len(t))
@@ -298,6 +298,8 @@ class VentanaPrincipal(QMainWindow):
         #self.plt.clear()
     
     def read_data(self):
+        select_DB = 0
+        ban = 0
         if not self.serial.canReadLine(): return
         rx = self.serial.readLine()
         x = str(rx, 'utf-8').strip()
@@ -310,24 +312,49 @@ class VentanaPrincipal(QMainWindow):
         self.y = self.y[1:]
         self.y.append(x)
         self.c.append(x)
+        '''
+        data = self.c
+        PAN, peaks = QRS(select_DB,ban,data)
+        
+        if len(peaks) ==0:
+            pass
+        elif len(peaks)==1:
+            
+            self.d.append(peaks[0])
+            
+        elif len(self.d)>=2:
+            dif = self.d[-1]-self.d[-2]
+            RR = dif/148
+            if RR < 0.6 or RR > 1:
+                displayText = 'A'
+            else:
+                displayText = 'N'
+            BPM = RR*100
+            BPM = 'BPM: '+str("{:.1f}".format(BPM))
+            self.label_BPM.setText(BPM)
+            self.label_ritmo.setText(displayText)
+            
+            
         #print(len(self.c))
-        if len(self.c) == 740: # muestras en 5s
+        '''
+        if len(self.c) == 148: # muestras en 5s
             select_DB = 0
             ban = 0
             data = self.c
             PAN, peaks = QRS(select_DB,ban,data)
-            BPM = (len(peaks)*60)/5 # 5 tiempo de muestra
+            BPM = (len(peaks)*60)/1 # 5 tiempo de muestra
             displayText = 'No entra'
             if BPM >= 55 and BPM <= 100:
-                displayText = 'Normal'
+                displayText = 'N'
             if BPM < 55:
-                displayText = 'Bradicardia'
+                displayText = 'A'
             if BPM > 100:
-                displayText = 'Taquicardia'
+                displayText = 'A'
             BPM = 'BPM: '+str("{:.1f}".format(BPM))
             self.label_BPM.setText(BPM)
             self.label_ritmo.setText(displayText)
             self.c = []
+            
         self.plt5.clear()
         self.plt5.plot(self.x, self.y, pen=pg.mkPen('#e00518', width=2))
 
