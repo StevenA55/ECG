@@ -433,11 +433,11 @@ border-bottom-left-radius: 20px;
                     <item>
                      <widget class="QPushButton" name="bt_who">
                       <property name="text">
-                       <string>¿Quiénes somos?</string>
+                       <string>Estadísticas</string>
                       </property>
                       <property name="icon">
                        <iconset resource="icons.qrc">
-                        <normaloff>:/icons/icons/users.svg</normaloff>:/icons/icons/users.svg</iconset>
+                        <normaloff>:/icons/icons/bar-chart-2.svg</normaloff>:/icons/icons/bar-chart-2.svg</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -2393,19 +2393,48 @@ border -radius
              </layout>
             </widget>
             <widget class="QWidget" name="page_cuatro">
-             <widget class="QLabel" name="label_8">
-              <property name="geometry">
-               <rect>
-                <x>310</x>
-                <y>290</y>
-                <width>91</width>
-                <height>21</height>
-               </rect>
+             <layout class="QHBoxLayout" name="horizontalLayout_17">
+              <property name="spacing">
+               <number>0</number>
               </property>
-              <property name="text">
-               <string>¿Quiénes somos?</string>
+              <property name="leftMargin">
+               <number>0</number>
               </property>
-             </widget>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_8">
+                <property name="minimumSize">
+                 <size>
+                  <width>400</width>
+                  <height>300</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap>ESTASSAD.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
             <widget class="QWidget" name="page_cinco">
              <layout class="QHBoxLayout" name="horizontalLayout_16">
